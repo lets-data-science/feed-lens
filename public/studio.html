@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feed Lens · Your reading workspace</title>
+    <link rel="stylesheet" href="/studio.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <a class="brand" href="/"
+        ><img
+          src="/lds-logo.svg"
+          class="brandmark"
+          width="44"
+          height="44"
+          alt=""
+        />
+        <span>Feed Lens <small>AN LDS PROJECT</small></span></a
+      ><span class="local-tag">Local workspace <span>v1.0</span></span>
+    </header>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">A LITTLE MORE FOCUS.</p>
+        <h1>Your feed.<br />Your reading rules.</h1>
+        <p>
+          Build a lens that helps you spot useful AI posts as you scroll. Try
+          your rules here, then take the same extension to LinkedIn.
+        </p>
+      </section>
+      <section class="setup" aria-labelledby="setup-heading">
+        <div>
+          <h2 id="setup-heading">Your workspace is ready.</h2>
+          <p id="health" role="status">Checking the local connection…</p>
+        </div>
+        <button id="pair" type="button">
+          Connect extension <span aria-hidden="true">↗</span>
+        </button>
+        <div id="connection" hidden>
+          <label for="pair-code">Local pairing code</label>
+          <div class="copy-row">
+            <input
+              id="pair-code"
+              type="password"
+              readonly
+              autocomplete="off"
+            /><button id="copy" type="button">Copy code</button>
+          </div>
+          <p>
+            In Chrome, load the <code>extension</code> folder with Load
+            unpacked. Paste this code under <strong>Local connection</strong> in
+            Feed Lens. Start on this page first. Your API key stays in Node.
+          </p>
+          <p class="copy-status" id="copy-status" role="status"></p>
+        </div>
+      </section>
+      <div class="workspace">
+        <aside class="lens-panel">
+          <p class="eyebrow">YOUR LENS</p>
+          <h2>What deserves<br />your attention?</h2>
+          <label for="goal">Focus on</label
+          ><textarea id="goal" maxlength="300" rows="3"></textarea
+          ><label for="criteria">Make it useful with</label
+          ><textarea id="criteria" maxlength="300" rows="4"></textarea>
+          <p class="hint">
+            These fields belong to this one-post workbench. In the extension,
+            set the same criteria in its popup.
+          </p>
+          <button id="analyze" type="button">
+            Check the selected post with Jev <span aria-hidden="true">↗</span>
+          </button>
+          <p id="live-status" class="hint" role="status">
+            One click sends one fictional post and these criteria to TypeSafe.
+          </p>
+          <details>
+            <summary>Before your first live check</summary>
+            <p>
+              Copy <code>.env.example</code> to <code>.env.local</code>, add
+              your own TypeSafe key, then restart <code>npm start</code>. Never
+              put the key in this browser.
+            </p>
+            <p>
+              After completing the questions, run
+              <code>npm run checkpoint -- questions</code>. No key is needed for
+              that check.
+            </p>
+          </details>
+        </aside>
+        <section class="feed" aria-labelledby="feed-heading">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">PRACTICE FEED</p>
+              <h2 id="feed-heading">A safe place to try it.</h2>
+            </div>
+            <span class="fixture-label">Fictional posts</span>
+          </div>
+          <p class="feed-note">
+            Select a post for a live check, or start the unpacked extension here
+            to see its real badges while you scroll. Nothing is posted to
+            LinkedIn.
+          </p>
+          <div id="posts"></div>
+        </section>
+      </div>
+      <section class="policy" aria-labelledby="policy-title">
+        <div>
+          <p class="eyebrow">NO API CALLS</p>
+          <h2 id="policy-title">Same signals. Your decision.</h2>
+          <p>
+            This rule explorer uses authored signals. Change a cutoff and watch
+            the decision change. It never calls Jev or changes the extension's
+            saved settings.
+          </p>
+        </div>
+        <div class="policy-controls">
+          <label for="policy-post">Example</label
+          ><select id="policy-post"></select
+          ><label for="minimum"
+            >Minimum usefulness <output id="minimum-value">65</output></label
+          ><input id="minimum" type="range" min="10" max="95" value="65" />
+          <div id="policy-result" role="status"></div>
+          <p class="hint">
+            Fit = 100 × min(topic, usefulness, 1 − bait). It is an index for
+            these rules, not a measured probability that a post is good or true.
+          </p>
+        </div>
+      </section>
+      <footer>
+        Built for learning. Desktop Chrome + Node.js 22.9+. No sponsorship
+        implied.
+        <a
+          href="https://docs.typesafe.ai/models"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Check TypeSafe pricing ↗</a
+        >
+      </footer>
+    </main>
+    <script type="module" src="/studio.mjs"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Feed Lens · LDS Projects",
+  "version": "1.0.0",
+  "description": "Your reading criteria, applied to LinkedIn as you scroll. Live Jev scores with a local, private-key connection.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["http://127.0.0.1/*"],
+  "optional_host_permissions": ["https://www.linkedin.com/*"],
+  "background": {
+    "service_worker": "worker.mjs",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Feed Lens",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/lens-16.png",
+      "32": "icons/lens-32.png"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'"
+  },
+  "icons": {
+    "16": "icons/lens-16.png",
+    "32": "icons/lens-32.png",
+    "48": "icons/lens-48.png",
+    "128": "icons/lens-128.png"
+  }
+}

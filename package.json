@@ -1,0 +1,22 @@
+{
+  "name": "lds-feed-lens",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local feed reader and browser extension built with Jev. An LDS Project.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lets-data-science/feed-lens.git"
+  },
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env.local server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "checkpoint": "node scripts/checkpoint.mjs",
+    "smoke": "node --env-file-if-exists=.env.local scripts/smoke.mjs",
+    "evaluate": "node --env-file-if-exists=.env.local scripts/evaluate.mjs"
+  }
+}

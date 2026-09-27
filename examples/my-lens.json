@@ -1,0 +1,12 @@
+{
+  "goal": "Measurement and testing of machine learning systems.",
+  "criteria": "An explicit comparison, metric with a useful definition, test setup or concrete failure analysis I can apply.",
+  "cases": [
+    {"id":"comparison","split":"develop","expected":"read","text":"Before comparing two classifiers, freeze the same test rows and label definitions. Record precision and recall at the threshold you will actually deploy. Inspect false positives separately from false negatives, since their costs differ. Keep the final test set separate from threshold tuning."},
+    {"id":"no-baseline","split":"develop","expected":"skip","text":"Our amazing AI classifier scored 99 percent. It is the future. We are not sharing the metric definition, baseline, class balance or test set. Trust the number and you will never need another evaluation tool."},
+    {"id":"discussion","split":"develop","expected":"unsure","text":"I am comparing two retrieval models and wondering how to choose an evaluation set. Which failure categories should be represented? I do not have a worked method or result yet; I would like to learn from people who have done this."},
+    {"id":"gated","split":"develop","expected":"skip","text":"My secret benchmark will fix all your machine learning problems. Follow me and comment EVAL to unlock the metrics. There is no test setup, comparison or example in this post. Only commenters get the actual guide."},
+    {"id":"unrelated","split":"check","expected":"skip","text":"Before painting a wooden shelf, clean and sand the surface. Remove dust, apply a suitable primer and let it dry before adding paint. Several thin coats are easier to control than one thick coat."},
+    {"id":"latency","split":"check","expected":"read","text":"To compare model latency, keep hardware, batch size and input lengths fixed. Warm up both models before timing, include device synchronization where required, and repeat the runs. Report a distribution rather than only the fastest observation; one unusually quick run can hide tail delays."}
+  ]
+}

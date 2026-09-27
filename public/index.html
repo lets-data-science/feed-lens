@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Feed Lens · Read with intention</title>
+    <link rel="stylesheet" href="/app.css" />
+    <script type="module" src="/app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip" href="#feed">Skip to feed</a>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Feed Lens home"
+        ><span class="brand-icon" aria-hidden="true">◉</span> feed<span
+          >lens</span
+        ></a
+      ><span class="top-label">AN LDS PROJECT</span
+      ><button class="quiet" id="pair-button" type="button">
+        Connect extension <span aria-hidden="true">↗</span>
+      </button>
+    </header>
+    <main class="workspace">
+      <aside class="controls" aria-label="Reading preferences">
+        <div class="section-label">YOUR LENS</div>
+        <h1>A little less noise.<br /><em>A lot more signal.</em></h1>
+        <p class="muted intro">
+          A feed that reflects what you came here to learn.
+        </p>
+        <details id="preferences-panel" open>
+          <summary class="mobile-preferences">
+            Adjust your lens <span>Focus &amp; filters ↓</span>
+          </summary>
+          <label for="goal-preset">I am here for</label
+          ><select id="goal-preset">
+            <option value="data">Data &amp; SQL</option>
+            <option value="ai">Building with AI</option>
+            <option value="product">Product &amp; research</option>
+            <option value="custom">My own focus</option>
+          </select>
+          <label for="goal">My reading goal</label
+          ><textarea id="goal" rows="4" maxlength="300"></textarea>
+          <div class="divider"></div>
+          <div class="row">
+            <h2>Make room for the useful</h2>
+            <span class="tiny">YOUR RULES</span>
+          </div>
+          <label class="range-label" for="relevance"
+            >Minimum relevance <output id="relevance-value">0.55</output></label
+          ><input
+            type="range"
+            id="relevance"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.55"
+          />
+          <p class="hint">Raise this to narrow your focus.</p>
+          <label class="range-label" for="bait"
+            >Fold at bait signal <output id="bait-value">0.70</output></label
+          ><input
+            type="range"
+            id="bait"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.70"
+          />
+          <p class="hint">Lower this to fold more possible bait.</p>
+          <div class="focus-setting">
+            <div>
+              <label for="focus">Focus view</label>
+              <p class="hint">Fold posts outside your rules.</p>
+            </div>
+            <input type="checkbox" role="switch" id="focus" />
+          </div>
+          <p class="rule-note">
+            Changing these rules uses the signals you already have. No new API
+            call.
+          </p>
+          <button class="text-button" id="reset" type="button">
+            Reset my lens
+          </button>
+        </details>
+        <div class="privacy-note">
+          <span aria-hidden="true">◇</span>
+          <div>
+            <strong>Your key stays local.</strong>
+            <p>
+              Live analysis sends only post text and your goal to TypeSafe.
+              Avoid private or sensitive content.
+            </p>
+          </div>
+        </div>
+      </aside>
+      <section class="feed-column" aria-labelledby="feed-heading">
+        <div class="feed-heading">
+          <div>
+            <div class="section-label">THE EVERYDAY FEED</div>
+            <h2 id="feed-heading">Read with intention.</h2>
+          </div>
+          <span class="sample-label">Fictional sample posts</span>
+        </div>
+        <div class="action-bar">
+          <div class="modes" role="group" aria-label="Analysis mode">
+            <button id="demo-mode" aria-pressed="true" type="button">
+              Demo</button
+            ><button id="live-mode" aria-pressed="false" type="button">
+              Live Jev
+            </button>
+          </div>
+          <button class="primary" id="analyze" type="button">
+            Analyze the feed <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <p id="mode-note" class="mode-note">
+          Demo uses authored signals. No AI request, no API key.
+        </p>
+        <div id="status" class="status" role="status" aria-live="polite">
+          Your feed is ready. Analyze it to reveal the signals.
+        </div>
+        <div class="feed-summary">
+          <span id="count">6 posts to explore</span
+          ><span id="call-count">No calls made</span>
+        </div>
+        <div id="feed" tabindex="-1"></div>
+        <details class="custom-post">
+          <summary>Try a post of your own <span>Live mode</span></summary>
+          <label for="custom-text"
+            >Paste public text you have permission to send</label
+          ><textarea
+            id="custom-text"
+            rows="5"
+            maxlength="5000"
+            placeholder="Paste a post here. Your draft stays in this tab until you analyze it."
+          ></textarea
+          ><button id="add-post" class="secondary" type="button">
+            Add to my feed
+          </button>
+          <p class="hint">
+            Custom posts are not saved. Refresh to remove them.
+          </p>
+        </details>
+      </section>
+      <aside class="inspector" aria-label="Signal inspector">
+        <div class="inspector-top">
+          <span class="section-label">BEHIND THE BADGE</span
+          ><span aria-hidden="true">↙</span>
+        </div>
+        <div id="inspector-content">
+          <div class="lens-art" aria-hidden="true">
+            <i></i><i></i><span>?</span>
+          </div>
+          <h2>Stay curious.<br />Check the signal.</h2>
+          <p>
+            Analyze the feed, then select any badge. You will see what the model
+            was asked and which rule affected the post.
+          </p>
+          <div class="note">
+            A useful signal is a reason to look closer. It is not a verdict
+            about a person.
+          </div>
+        </div>
+      </aside>
+    </main>
+    <footer>
+      Built to be questioned.
+      <span
+        >Feed Lens does not detect AI authorship or verify factual claims.</span
+      >
+    </footer>
+    <dialog id="pair-dialog">
+      <form method="dialog">
+        <button class="dialog-close" aria-label="Close extension setup">
+          ×
+        </button>
+      </form>
+      <span class="section-label">BRING YOUR LENS ALONG</span>
+      <h2>Connect your extension</h2>
+      <ol>
+        <li>Open <strong>chrome://extensions</strong> in Chrome.</li>
+        <li>
+          Enable Developer mode, choose <strong>Load unpacked</strong>, and
+          select this project's <strong>extension</strong> folder.
+        </li>
+        <li>Pin Feed Lens. Paste the code below into its popup.</li>
+        <li>
+          Open LinkedIn Home. Set your topic and what makes a post useful, then
+          choose <strong>Start my lens</strong>.
+        </li>
+      </ol>
+      <label for="pair-code">Local pairing code (not your API key)</label>
+      <div class="pair-field">
+        <input id="pair-code" readonly /><button
+          id="copy-pair"
+          class="secondary"
+          type="button"
+        >
+          Copy
+        </button>
+      </div>
+      <p class="hint">
+        The code changes when you restart this server. Keep the server running.
+        The browser extension uses live Jev. Add your own key to .env.local
+        before starting it. You can also test it on this fictional sample feed.
+      </p>
+      <p class="note">
+        After you start the lens, posts are scored as they enter view.
+        Background tabs do not start new requests. Choose Pause to stop and
+        remove badges.
+      </p>
+    </dialog>
+  </body>
+</html>

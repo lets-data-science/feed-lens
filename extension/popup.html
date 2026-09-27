@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feed Lens</title>
+    <link rel="stylesheet" href="popup.css" />
+    <script type="module" src="popup.mjs"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <img src="lens.svg" class="logo" width="34" height="34" alt="" />
+      <div class="wordmark">
+        <strong>Feed Lens</strong><span>By LDS. Powered by Jev.</span>
+      </div>
+      <span id="state" class="state">Paused</span>
+    </header>
+    <form id="lens-form">
+      <main class="settings-scroll">
+        <div class="intro">
+          <h1>Your reading lens.</h1>
+          <p>Find the posts that move you forward.</p>
+        </div>
+        <label for="goal">Focus on</label>
+        <textarea
+          id="goal"
+          rows="2"
+          minlength="8"
+          maxlength="300"
+          required
+          spellcheck="false"
+        ></textarea>
+        <div class="presets" role="group" aria-label="Reading presets">
+          <button type="button" data-preset="engineering" aria-pressed="false">
+            AI engineering
+          </button>
+          <button type="button" data-preset="research" aria-pressed="false">
+            ML research
+          </button>
+          <button type="button" data-preset="practical" aria-pressed="false">
+            Practical AI
+          </button>
+        </div>
+        <label for="criteria">Make it useful with</label>
+        <textarea
+          id="criteria"
+          rows="3"
+          minlength="8"
+          maxlength="300"
+          required
+        ></textarea>
+        <details class="tuning" id="tuning">
+          <summary>
+            <span class="summary-title">Reading strictness</span
+            ><span id="strictness-summary" class="summary-meta">Balanced</span
+            ><span class="chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="detail-content">
+            <div class="range-row">
+              <label for="minRelevance">Topic match</label
+              ><output for="minRelevance" id="minRelevance-value">70</output>
+            </div>
+            <input
+              id="minRelevance"
+              type="range"
+              min="10"
+              max="95"
+              step="5"
+              value="70"
+            />
+            <div class="range-row">
+              <label for="minUsefulness">Useful detail</label
+              ><output for="minUsefulness" id="minUsefulness-value">65</output>
+            </div>
+            <input
+              id="minUsefulness"
+              type="range"
+              min="10"
+              max="95"
+              step="5"
+              value="65"
+            />
+            <div class="range-row">
+              <label for="maxBait">Allow bait up to</label
+              ><output for="maxBait" id="maxBait-value">70</output>
+            </div>
+            <input
+              id="maxBait"
+              type="range"
+              min="10"
+              max="95"
+              step="5"
+              value="70"
+            />
+            <p class="hint">
+              Higher topic and detail cutoffs narrow your feed. Close calls stay
+              amber.
+            </p>
+          </div>
+        </details>
+        <details id="pairing">
+          <summary>
+            <span class="summary-title">Local connection</span
+            ><span id="pair-state" class="summary-meta">Set up</span
+            ><span class="chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="detail-content">
+            <label for="token">Pairing code</label
+            ><input
+              id="token"
+              type="password"
+              autocomplete="off"
+              spellcheck="false"
+              maxlength="48"
+              placeholder="Paste the code from your local app"
+            />
+            <p class="hint">
+              <a href="http://127.0.0.1:3075" target="_blank" rel="noopener"
+                >Open the local app</a
+              >, choose Connect extension, then copy its code. Your API key
+              stays in that app.
+            </p>
+            <p class="hint">
+              Only post text and your criteria go to TypeSafe. Comments,
+              messages and profile fields are excluded. Posts stay visible.
+              Scores are reading signals, not fact checks.
+            </p>
+            <p class="hint" id="remaining"></p>
+          </div>
+        </details>
+      </main>
+      <footer class="app-footer">
+        <div class="actions">
+          <button id="start" class="primary" type="submit">
+            <span id="start-label">Start lens</span
+            ><svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14m-6-6 6 6-6 6" />
+            </svg></button
+          ><button id="pause" class="pause" type="button">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <rect x="6" y="5" width="4" height="14" rx="1" />
+              <rect x="14" y="5" width="4" height="14" rx="1" /></svg
+            >Pause
+          </button>
+        </div>
+        <p id="status" role="status" aria-live="polite">
+          Open LinkedIn Home to start your lens.
+        </p>
+      </footer>
+    </form>
+  </body>
+</html>
