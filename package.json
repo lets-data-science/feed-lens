@@ -1,6 +1,6 @@
 {
   "name": "lds-feed-lens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "A local feed reader and browser extension built with Jev. An LDS Project.",
@@ -18,5 +18,6 @@
     "checkpoint": "node scripts/checkpoint.mjs",
     "smoke": "node --env-file-if-exists=.env.local scripts/smoke.mjs",
     "evaluate": "node --env-file-if-exists=.env.local scripts/evaluate.mjs"
-  }
+  },
+  "license": "Apache-2.0"
 }

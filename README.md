@@ -21,11 +21,11 @@ git clone https://github.com/lets-data-science/feed-lens.git
 cd feed-lens
 ```
 
-To build the two teaching tasks yourself, download the **starter** from the [version 1.0 release](https://github.com/lets-data-science/feed-lens/releases/tag/v1.0.0). The repository and complete reference already contain the finished implementations. The [eight-step guide](LEARNER-GUIDE.md) is included, so you can follow it without an LDS account.
+To build the two teaching tasks yourself, download the **starter** from the [version 1.0.1 release](https://github.com/lets-data-science/feed-lens/releases/tag/v1.0.1). The repository and complete reference already contain the finished implementations. The [eight-step guide](LEARNER-GUIDE.md) is included, so you can follow it without an LDS account.
 
 1. If you downloaded a ZIP, extract it. Open the extracted folder in your editor, with `package.json` at its root.
 2. Run `npm run check`, then `npm start`. No package installation or runtime dependencies are needed.
-3. Open **http://127.0.0.1:3075**. Keep the terminal running. Ctrl+C stops the server.
+3. Open **http://127.0.0.1:3075**. Keep this terminal running. Open a second terminal in the same project folder for the checks below. To restart after changing a file, press Ctrl+C in the server terminal and run `npm start` again.
 4. Follow **[LEARNER-GUIDE.md](LEARNER-GUIDE.md)**. In the starter, complete `lib/reading-questions.mjs` and `lib/reading-policy.mjs`. The reference already contains both implementations.
 5. Run `npm run checkpoint -- questions`, `npm run checkpoint -- policy` and `npm test`. Starter checks intentionally fail until the two tasks are done.
 
@@ -118,8 +118,14 @@ Add `--live` to send the four development cases with your own key. After revisin
 
 Run `npm test` and follow [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md). Deterministic tests do not establish model accuracy. Label your own examples before making live calls and keep false reads and false skips separately. A few successful posts do not prove compatibility with every LinkedIn account or layout.
 
-The LDS walkthroughs are screen recordings of the actual app and unpacked extension on **fictional local posts**. Recorded Jev answers are replayed for repeatable filming. They are not personal LinkedIn screen captures. Captions and transcripts accompany them.
+The LDS project preview shows an owner-recorded **actual LinkedIn feed** with Feed Lens 1.0.0. It preserves the original scrolling and recorded Read/Skip recommendations; the account sidebar and messaging UI are cropped out. Personal-fit scores reflect the reader's criteria, not factual accuracy. The separate setup walkthrough uses the actual extension popup in a disposable local session, with pairing values masked. Both full videos include AI-generated English narration, synchronized captions and a matching transcript. The short autoplay preview stays muted. Website media is separate from these source-code downloads.
 
 When sharing your own build, exclude `.env.local`, `backups/`, personal data and account-specific evidence. Distribution through an extension store is a separate release with its own privacy and permissions review.
 
 Primary sources: [TypeSafe API](https://docs.typesafe.ai/api), [Noul](https://docs.typesafe.ai/primitives/noul), [Chrome content scripts](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts), [Chrome network requests](https://developer.chrome.com/docs/extensions/develop/concepts/network-requests).
+
+## License
+
+Original LDS code is licensed under [Apache 2.0](LICENSE). See
+[LICENSING.md](LICENSING.md) for third-party terms, earlier licenses and the
+scope of this grant. Maintained by [Let's Data Science](https://letsdatascience.com).

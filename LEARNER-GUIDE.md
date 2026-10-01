@@ -10,9 +10,9 @@ An AI evaluation tip gives you a method you can try. Another post promises a sec
 
 ### Watch the real extension at work
 
-1080p screen recording of the actual extension on the shipped fictional practice feed. Recorded Jev responses are replayed for a repeatable walkthrough. This is not a capture of someone's LinkedIn feed. Captions and a text transcript are included.
+36-second recording of Feed Lens 1.0.0 on an actual LinkedIn feed. Original timing is preserved; account sidebars and messaging UI are cropped out. Includes AI-generated narration, English captions and a transcript.
 
-**Transcript:** The local practice feed contains fictional posts. Feed Lens checks an AI evaluation tip as it enters view. A green badge recommends reading it. Opening the badge reveals the three signals and the active reading rules. A post promising a secret guide behind a comment receives a different recommendation. The reader can override that recommendation. Pausing removes the badges and stops new work. The recording uses the actual unpacked extension with recorded Jev responses; playback does not call a model.
+**Transcript:** Here's Feed Lens on my LinkedIn feed, looking for useful AI engineering posts. This research post fits, so it gets a green recommendation. That's a personal-fit score, not a fact check. But mentioning AI isn't enough. Without useful detail, a post can still get a Skip. Amber means it's a close call. As I scroll, new posts are checked automatically. Nothing is hidden; I'm still in control. And here's Jev in production: a practical example worth stopping to read.
 
 You will build a desktop Chrome extension for LinkedIn Home. Describe your topic and what useful looks like, then start the lens. As a supported post enters view, it gets a Worth reading, Skip this post or Take a quick look badge. Open the badge to inspect the signals. The post remains visible; you decide whether to read it.
 
@@ -65,8 +65,8 @@ The starter already contains the extension UI, local server and practice feed. Y
 ### Your project files · version 1.0
 
 - [View Feed Lens on GitHub ↗](https://github.com/lets-data-science/feed-lens): The public LDS repository: clone the complete application, browse every file or download the versioned starter and reference from Releases. Bring your own API key.
-- [Download the starter ZIP ↗](https://github.com/lets-data-science/feed-lens/releases/download/v1.0.0/feed-lens-starter-1.0.0.zip): A working local workspace and extension. You implement the three questions and the reading policy in two small files. Includes recovery checkpoints.
-- [Download the complete reference ZIP ↗](https://github.com/lets-data-science/feed-lens/releases/download/v1.0.0/feed-lens-solution-1.0.0.zip): The finished application, tests, setup guide, acceptance checklist and both checkpoints. No API key or personal data included.
+- [Download the starter ZIP ↗](https://github.com/lets-data-science/feed-lens/releases/download/v1.0.1/feed-lens-starter-1.0.1.zip): A working local workspace and extension. You implement the three questions and the reading policy in two small files. Includes recovery checkpoints.
+- [Download the complete reference ZIP ↗](https://github.com/lets-data-science/feed-lens/releases/download/v1.0.1/feed-lens-solution-1.0.1.zip): The finished application, tests, setup guide, acceptance checklist and both checkpoints. No API key or personal data included.
 
 Extract the starter ZIP into a new folder such as Documents/feed-lens-starter. Open that extracted folder in your editor and its terminal. package.json and server.mjs should be directly inside the folder. Do not run the commands from inside extension or from the ZIP preview.
 
@@ -81,6 +81,10 @@ npm start
 Node must be 22.9 or newer. The check verifies the shipped files without making a provider request. No npm install is needed: the application uses Node's built-in modules.
 
 Open http://127.0.0.1:3075. You should see Your feed. Your reading rules., four fictional practice posts and a No API key yet status. Keep that terminal open. Ctrl+C stops the server. The practice feed is safe to browse without a key; the live check button gives setup help until you add one.
+
+### Keep two terminals open
+
+Leave npm start running in the first terminal. Open a second terminal in the same project folder for the checkpoint, smoke and test commands in this guide. To restart the server, press Ctrl+C in the first terminal and run npm start again.
 
 ### Choose your session cap
 
@@ -225,7 +229,7 @@ Stop the running server with Ctrl+C, then run npm start again. Refresh the local
 npm run smoke -- --live
 ```
 
-This sends Maya's fictional AI evaluation post and the default criteria to TypeSafe. Expect the model name, relevance/usefulness/bait answers and token usage. Exact signals can vary. Without --live the command makes no request.
+Run this in your second terminal. It sends Maya's fictional AI evaluation post and the default criteria to TypeSafe. Expect the model name, relevance/usefulness/bait answers and token usage. Exact signals can vary. Without --live the command makes no request.
 
 ### Where the data goes
 
@@ -304,7 +308,7 @@ A successful live response proves the connection and schema worked. It does not 
 
 ### Keep experimentation bounded
 
-The web server allows 40 attempted live calls per session, including provider failures, with at most two distinct requests in flight. Identical text and criteria reuse a bounded cache. Restarting clears both the cache and the count. The one-call smoke command runs separately from the web server counter, so use it deliberately.
+By default, the web server allows 40 attempted live calls per session, including provider failures, with at most two distinct requests in flight. Your FEED_LENS_MAX_CALLS setting can change or remove that session cap. Identical text and criteria reuse a bounded cache. Restarting clears both the cache and the count. The one-call smoke command runs separately from the web server counter, so use it deliberately.
 
 **Checkpoint:** I received three real Jev answers, kept my key out of browser code and can name the text and criteria sent to TypeSafe.
 
@@ -411,7 +415,7 @@ npm run checkpoint -- policy
 npm test
 ```
 
-The policy checkpoint exercises four examples, both cutoff changes, the arithmetic and the exact bait boundary. After both files are complete, the full offline suite should pass. Restart the server so it loads your edits.
+Run these in your second terminal. After both files are complete, the full offline suite should pass. Then return to the server terminal, press Ctrl+C and run npm start again to load your edits. Refresh the workspace before continuing to the extension step.
 
 **Checkpoint:** My policy check passes and I reproduced Read → Unsure → Skip by changing only Noor's usefulness cutoff.
 
@@ -435,9 +439,9 @@ Keep npm start running and open http://127.0.0.1:3075. Choose Connect extension,
 
 ### Watch the extension controls and pairing field
 
-Screen recording of the actual extension popup, with setup notes beside it. Pairing values are masked. The recording uses a disposable test session, and no API key appears.
+26-second recording of the actual extension popup in a disposable test session. Pairing values are masked; no API key appears. Includes AI-generated narration, English captions and a transcript.
 
-**Transcript:** The actual Feed Lens popup shows Focus on and Make it useful with. Selecting ML research or AI engineering fills both fields. Opening Reading strictness exposes three independent cutoffs. Local connection contains a masked pairing field: copy your code from the running local workspace and paste it here. Start lens begins on the active supported feed. Keep npm start running, and allow LinkedIn access when Chrome asks. No TypeSafe API key is entered in the popup.
+**Transcript:** Choose your topic, and what makes a post useful. Presets give you a starting point for both. I'll pick AI engineering. You can edit these preferences. Reading strictness sets your cutoffs for relevance, usefulness, and clickbait. Paste the pairing code from your local app here, not your API key. Keep the app running. Try the practice feed before LinkedIn.
 
 ### Check the whole loop on the practice feed
 
@@ -576,8 +580,8 @@ Facebook, X and Reddit need their own browser integration; changing your reading
 ### Your project files · version 1.0
 
 - [View Feed Lens on GitHub ↗](https://github.com/lets-data-science/feed-lens): The public LDS repository: clone the complete application, browse every file or download the versioned starter and reference from Releases. Bring your own API key.
-- [Download the starter ZIP ↗](https://github.com/lets-data-science/feed-lens/releases/download/v1.0.0/feed-lens-starter-1.0.0.zip): A working local workspace and extension. You implement the three questions and the reading policy in two small files. Includes recovery checkpoints.
-- [Download the complete reference ZIP ↗](https://github.com/lets-data-science/feed-lens/releases/download/v1.0.0/feed-lens-solution-1.0.0.zip): The finished application, tests, setup guide, acceptance checklist and both checkpoints. No API key or personal data included.
+- [Download the starter ZIP ↗](https://github.com/lets-data-science/feed-lens/releases/download/v1.0.1/feed-lens-starter-1.0.1.zip): A working local workspace and extension. You implement the three questions and the reading policy in two small files. Includes recovery checkpoints.
+- [Download the complete reference ZIP ↗](https://github.com/lets-data-science/feed-lens/releases/download/v1.0.1/feed-lens-solution-1.0.1.zip): The finished application, tests, setup guide, acceptance checklist and both checkpoints. No API key or personal data included.
 
 ### Your finished handoff
 
